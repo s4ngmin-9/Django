@@ -40,6 +40,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'todo',
     'users',
+    'django_extensions',
 ]
 
 OWN_APPS = [
@@ -47,7 +48,7 @@ OWN_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'django_extensions',
+    
 ]
 
 INSTALLED_APPS = DJANGO_APPS + OWN_APPS + THIRD_PARTY_APPS
