@@ -1,7 +1,11 @@
 from django.urls import path
-from . import views
+from todo.cb_views import TodoListView, TodoCreateView, TodoDetailView, TodoUpdateView, TodoDeleteView
+
 
 urlpatterns = [
-    path('', views.todo_list, name='todo_list'),  # 'todo/'를 제거하고 ''로 변경
-    path('<int:todo_id>/', views.todo_info, name='todo_info'), # 'todo/'를 제거
+    path('todo/', TodoListView.as_view(), name='cbv_todo_list',),
+    path('todo/create/', TodoCreateView.as_view(), name='cbv_todo_create'),
+    path('todo/<int:pk>/', TodoDetailView.as_view(), name='cbv_todo_info'),
+    path('todo/<int:pk>/update/', TodoUpdateView.as_view(), name='cbv_todo_update'),
+    path('todo/<int:pk>/delete/', TodoDeleteView.as_view(), name='cbv_todo_delete'),
 ]
