@@ -1,9 +1,9 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from todo.views import todo_list, todo_info, todo_create, todo_update, todo_delete
-from users import views as user_views
-from django.conf import settings
-from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('todo/', todo_list, name='todo_list'),
@@ -12,11 +12,16 @@ urlpatterns = [
     path('todo/<int:todo_id>/update/', todo_update, name='todo_update'),
     path('todo/<int:todo_id>/delete/', todo_delete, name='todo_delete'),
     path('admin/', admin.site.urls),
+    # auth
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/login/', user_views.login, name='login'),
-    path('accounts/signup/', user_views.sign_up, name='signup'),
+    # path('accounts/login/', user_views.login, name='login'),
+    # path('accounts/signup/', user_views.sign_up, name='signup'),
+    path('users/',  include('users.urls')),
+    # CBV URL include
     path('cbv/', include('todo.urls')),
+    # summernote URL include
     path('summernote/', include('django_summernote.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
 
 if settings.DEBUG:
